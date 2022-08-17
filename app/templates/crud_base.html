@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Hi! {% endblock %}
+
+{% block content %}
+
+    {% macro row(id, name, content) -%}
+          <div class="row">
+              <div class="col-4">
+                <div class="list-group" id="list-tab" role="tablist">
+                  <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#{{id}}" role="tab" aria-controls="home">
+                      <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{name}}</h5>
+                      </div>
+                      <p class="mb-1">{{content}}</p>
+                  </a>
+                </div>
+              </div>
+        </div>
+    {%- endmacro %}
+<!--href="{{url_for('main.update', id=id)}}-->
+<div class="container">
+    <div class="col-md-12">
+    <h3>Notes</h3>
+        <form method="post">
+        <div><a class="btn btn-primary mg-3 btn-lg active" href="{{url_for('main.create')}}">Create</a>
+             <button type="submit" name="update"  class="btn btn-success mg-3 btn-lg active" value = "update">Update</button>
+             <button type="submit" name="delete"  class="btn btn-danger mg-3 btn-lg active" value = "delete">Delete</button>
+        </div>
+        </form>
+            {% for note in notes %}
+                {{row(note.id, note.name, note.content)}}
+            {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}
+

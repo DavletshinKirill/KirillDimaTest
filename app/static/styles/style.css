@@ -1,0 +1,15 @@
+/*rename*/
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    height: 350px;
+    width: 550px;
+    background: #c0c0c2;
+}
+
+/*rename*/
+.center_div {
+    padding-left: 35%;
+    padding-top: 10%;
+}
