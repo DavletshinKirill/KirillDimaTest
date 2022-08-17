@@ -1,14 +1,38 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Notes{% endblock %}
+{% block title %} {{title}} {% endblock %}
 
 {% block content %}
+    <div class="container center">
+        <div class="col">
+            {% for msg in get_flashed_messages() %}
+            {% if colour %}
+                <div class = "flash bg-success"> {{ msg }} </div>
+            {% else %}
+                <div class = "flash bg-danger"> {{ msg }} </div>
+            {% endif %}
+            {% endfor%}
+            <div class="col-md-4 center_div">
+                {{ wtf.quick_form(form) }}
+            </div>
+        </div>
+    </div>
+<style>
+    /*rename*/
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    height: 350px;
+    width: 550px;
+    background: #c0c0c2;
+}
 
-{% for msg in get_flashed_messages() %}
-<div class = "flash"> {{ msg }} </div>
-{% endfor%}
-<div class="col-md-4">
-    {{ wtf.quick_form(form) }}
-</div>
+/*rename*/
+.center_div {
+    padding-left: 35%;
+    padding-top: 10%;
+}
+</style>
 {% endblock %}

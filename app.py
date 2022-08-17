@@ -1,7 +1,7 @@
 import click
 from app import create_app, db
 from app.model import Users
-
+from flask import render_template
 app = create_app("development")
 
 

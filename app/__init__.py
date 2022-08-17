@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
@@ -13,6 +13,10 @@ login_manager = LoginManager()
 migrate = Migrate()
 
 
+def page_not_found(e):
+    return render_template("error.html", code=404, description="Page not found")
+
+
 def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
@@ -24,9 +28,11 @@ def create_app(config_name):
     migrate.init_app(app, db)
     mail.init_app(app)
 
+    app.register_error_handler(404, page_not_found)
+
     from .auth import auth
     app.register_blueprint(auth)
-    # from .main import main
-    # app.register_blueprint(main)
+    from .main import main
+    app.register_blueprint(main)
     return app
 
